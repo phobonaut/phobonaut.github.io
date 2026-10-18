@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /techrider-de.pdf
+Disallow: /techrider-en.pdf
