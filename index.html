@@ -11,17 +11,81 @@
 </head>
 
 <body class="mainsite">
-	<div class="header">
-	</div>
+	<!-- <div class="header">
+	</div> -->
 	<div class="main">
 		<a href="https://instagram.com/phobonaut/" target="_blank">
 			<img src="img/instagram.svg" class="extlogo">
 		</a>
-		<br>
+		&nbsp;
 		<a href="https://www.backstagepro.de/phobonaut" target="_blank">
 			<img alt="BackstagePRO" src="img/backstagepro.svg" class="extlogo">
 		</a>
 	</div>
+	<script>
+		(function () {
+			const defaultBanner = "img/banner.png";
+			const glitchedImages = [
+				"img/glitched/00.png",
+				"img/glitched/01.png",
+				"img/glitched/03.png",
+				"img/glitched/05.png",
+				"img/glitched/06.png",
+				"img/glitched/07.png",
+				"img/glitched/09.png",
+				"img/glitched/11.png",
+				"img/glitched/13.png",
+				"img/glitched/15.png",
+				"img/glitched/17.png",
+				"img/glitched/19.png",
+				"img/glitched/21.png",
+				"img/glitched/23.png"
+			];
+
+			// Preload images to prevent flickering during rapid succession
+			glitchedImages.forEach(function (src) {
+				const img = new Image();
+				img.src = src;
+			});
+
+			function pickRandomSequence(count) {
+				const pool = glitchedImages.slice();
+				const selected = [];
+				for (let i = 0; i < count; i++) {
+					const idx = Math.floor(Math.random() * pool.length);
+					selected.push(pool.splice(idx, 1)[0]);
+				}
+				return selected;
+			}
+
+			function scheduleNextGlitch() {
+				const delay = 2000 + Math.random() * 13000; // 2–15 seconds
+				setTimeout(runGlitchSequence, delay);
+			}
+
+			function runGlitchSequence() {
+				const count = 3 + Math.floor(Math.random() * 3); // 3–5 images
+				const sequence = pickRandomSequence(count);
+				const stepDuration = 500 / count; // 0.5 seconds total
+				let step = 0;
+
+				function nextStep() {
+					if (step < sequence.length) {
+						document.body.style.backgroundImage = 'url("' + sequence[step] + '")';
+						step++;
+						setTimeout(nextStep, stepDuration);
+					} else {
+						document.body.style.backgroundImage = 'url("' + defaultBanner + '")';
+						scheduleNextGlitch();
+					}
+				}
+
+				nextStep();
+			}
+
+			scheduleNextGlitch();
+		})();
+	</script>
 </body>
 
 </html>
