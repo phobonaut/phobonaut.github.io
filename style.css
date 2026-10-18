@@ -7,7 +7,7 @@ html, body {
 	background-color: #000000;
 	background-image: url("img/banner.png");
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: auto 100%;
 	background-attachment: fixed;
 	background-position: 50% 50%;
 	color: #ffffff;
